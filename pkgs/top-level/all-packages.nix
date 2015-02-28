@@ -9695,6 +9695,8 @@ let
 
   ipset = callPackage ../os-specific/linux/ipset { };
 
+  openiscsi = callPackage ../os-specific/linux/open-iscsi { };
+
   iw = callPackage ../os-specific/linux/iw { };
 
   jfbview = callPackage ../os-specific/linux/jfbview { };
@@ -9908,8 +9910,6 @@ let
     rtl8812au = callPackage ../os-specific/linux/rtl8812au { };
 
     openafsClient = callPackage ../servers/openafs-client { };
-
-    openiscsi = callPackage ../os-specific/linux/open-iscsi { };
 
     wis_go7007 = callPackage ../os-specific/linux/wis-go7007 { };
 
