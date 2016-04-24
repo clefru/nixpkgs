@@ -1,15 +1,16 @@
-{ stdenv, fetchurl, nukeReferences }:
+{ stdenv, fetchgit, nukeReferences, automake, autoconf, libtool, gettext, utillinux, openisns, openssl }:
 let
   pname = "open-iscsi-2.0-873";
 in stdenv.mkDerivation {
   name = "${pname}";
   outputs = [ "out" "iscsistart" ];
 
-  buildInputs = [ nukeReferences ];
+  buildInputs = [ nukeReferences automake autoconf libtool gettext utillinux openisns.lib openssl ];
   
-  src = fetchurl {
-    url = "http://www.open-iscsi.org/bits/${pname}.tar.gz";
-    sha256 = "1nbwmj48xzy45h52917jbvyqpsfg9zm49nm8941mc5x4gpwz5nbx";
+  src = fetchgit {
+    url = "https://github.com/open-iscsi/open-iscsi";
+    rev = "4c1f2d90ef1c73e33d9f1e4ae9c206ffe015a8f9";
+    sha256 = "09j4jap98zv4lb4xyzasz1jmf5dz52llnhrhmzypqdmd910b75ys";
   };
   
   DESTDIR = "$(out)";
@@ -27,6 +28,6 @@ in stdenv.mkDerivation {
   meta = {
     description = "A high performance, transport independent, multi-platform implementation of RFC3720";
     license = stdenv.lib.licenses.gpl2Plus;
-    homepage = http://www.open-iscsi.org;
+    homepage = http://www.open-iscsi.com;
   };
 }
