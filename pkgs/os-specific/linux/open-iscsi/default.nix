@@ -1,11 +1,11 @@
-{ stdenv, fetchgit, nukeReferences, automake, autoconf, libtool, gettext, utillinux, openisns, openssl }:
+{ stdenv, fetchgit, nukeReferences, automake, autoconf, libtool, gettext, utillinux, openisns, openssl, kmod}:
 let
   pname = "open-iscsi-2.0-873";
 in stdenv.mkDerivation {
   name = "${pname}";
   outputs = [ "out" "iscsistart" ];
 
-  buildInputs = [ nukeReferences automake autoconf libtool gettext utillinux openisns.lib openssl ];
+  buildInputs = [ nukeReferences automake autoconf libtool gettext utillinux openisns.lib openssl kmod ];
   
   src = fetchgit {
     url = "https://github.com/open-iscsi/open-iscsi";
@@ -15,6 +15,9 @@ in stdenv.mkDerivation {
   
   DESTDIR = "$(out)";
   
+  patches = [ ./kmod-via-make.diff ];
+  makeFlags = "USE_KMOD=1";
+
   preConfigure = ''
     sed -i 's|/usr/|/|' Makefile
   '';

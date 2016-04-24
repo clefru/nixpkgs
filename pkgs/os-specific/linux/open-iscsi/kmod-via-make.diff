@@ -1,0 +1,14 @@
+--- open-iscsi/usr/Makefile.orig	2016-04-24 13:51:26.301726559 +0200
++++ open-iscsi/usr/Makefile	2016-04-24 13:52:19.005844384 +0200
+@@ -33,6 +33,11 @@
+ CFLAGS += $(WARNFLAGS) -I../include -I. -D$(OSNAME) $(IPC_CFLAGS)
+ PROGRAMS = iscsid iscsiadm iscsistart
+ 
++ifeq ($(USE_KMOD),1)
++CFLAGS += -DUSE_KMOD
++LDFLAGS += -lkmod
++endif
++
+ # libc compat files
+ SYSDEPS_SRCS = $(wildcard ../utils/sysdeps/*.o)
+ # sources shared between iscsid, iscsiadm and iscsistart
