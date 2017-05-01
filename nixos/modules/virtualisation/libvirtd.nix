@@ -13,7 +13,12 @@ let
     auth_unix_rw = "none"
     ${cfg.extraConfig}
   '';
+  nvramConfig =
+    if cfg.qemuOvmf
+    then ''nvram = ["${pkgs.OVMF}/FV/OVMF_CODE.fd:${pkgs.OVMF}/FV/OVMF_VARS.fd"]''
+    else ''
   qemuConfigFile = pkgs.writeText "qemu.conf" ''
+    ${nvramConfig}
     ${cfg.qemuVerbatimConfig}
   '';
 
@@ -60,6 +65,16 @@ in {
         Contents written to the qemu configuration file, qemu.conf.
         Make sure to include a proper namespace configuration when
         supplying custom configuration.
+      '';
+    };
+
+
+    virtualisation.libvirtd.qemuOvmf = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        Allows libvirtd to locate the OVMF firmware to create new
+        VMs with UEFI.
       '';
     };
 
