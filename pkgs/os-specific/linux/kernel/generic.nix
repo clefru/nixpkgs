@@ -6,7 +6,7 @@
 , callPackage
 }:
 
-{ stdenv, buildPackages, perl, buildLinux
+{ stdenv, perl, buildLinux
 
 , # The kernel source tarball.
   src
@@ -112,8 +112,8 @@ let
     enableParallelBuilding = true;
   };
 
-  kernel = (callPackage ./manual-config.nix {}) {
-    inherit version modDirVersion src kernelPatches stdenv extraMeta configfile hostPlatform;
+  kernel = (callPackage ./manual-config.nix { buildPackages = buildPackages; }) {
+    inherit version modDirVersion src kernelPatches stdenv extraMeta configfile hostPlatform ;
 
     config = { CONFIG_MODULES = "y"; CONFIG_FW_LOADER = "m"; };
   };
