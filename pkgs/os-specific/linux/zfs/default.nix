@@ -148,7 +148,7 @@ in {
   # to be adapted
   zfsStable = common {
     # comment/uncomment if breaking kernel versions are known
-    incompatibleKernelVersion = "4.16";
+    # incompatibleKernelVersion = "4.xx";
 
     # this package should point to the latest release.
     version = "0.7.9";
@@ -167,7 +167,7 @@ in {
 
   zfsUnstable = common rec {
     # comment/uncomment if breaking kernel versions are known
-    incompatibleKernelVersion = "4.16";
+    # incompatibleKernelVersion = "4.xx";
 
     # this package should point to a version / git revision compatible with the latest kernel release
     version = "2018-05-22";
@@ -190,7 +190,7 @@ in {
   # also remove boot.zfs.enableLegacyCrypto
   zfsLegacyCrypto = common {
     # comment/uncomment if breaking kernel versions are known
-    incompatibleKernelVersion = "4.16";
+    # incompatibleKernelVersion = "4.xx";
 
     # this package should point to a version / git revision compatible with the latest kernel release
     version = "2018-02-01";

@@ -68,6 +68,11 @@ rec {
     patch = ./copperhead-4-16.patch;
   };
 
+  force_stack_protector_x64_4_16 = rec {
+    name = "force-stack-protector";
+    patch = ./force-stack-protector-x64.diff;
+  };
+
   # https://bugzilla.kernel.org/show_bug.cgi?id=197591#c6
   iwlwifi_mvm_support_version_7_scan_req_umac_fw_command = rec {
     name = "iwlwifi_mvm_support_version_7_scan_req_umac_fw_command";
