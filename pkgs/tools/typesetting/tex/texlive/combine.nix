@@ -125,8 +125,6 @@ in buildEnv {
         "$cnfOrig" > ./texmf.cnf
 
       patchCnfLua "./texmfcnf.lua"
-
-      rm updmap.cfg
     )
   '' +
     # updmap.cfg seems like not needing changes
