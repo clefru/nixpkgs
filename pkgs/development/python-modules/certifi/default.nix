@@ -1,6 +1,5 @@
 { lib
 , buildPythonPackage
-, isPy27
 , fetchFromGitHub
 , pytestCheckHook
 }:
@@ -9,8 +8,6 @@ buildPythonPackage rec {
   pname = "certifi";
   version = "2021.05.30";
 
-  disabled = isPy27;
-
   src = fetchFromGitHub {
     owner = pname;
     repo = "python-certifi";
@@ -18,6 +15,10 @@ buildPythonPackage rec {
     sha256 = "1i4ljsc47iac6kl1w4w6x0qia08s9z394z9lbyzc05pm7y8a3cmj";
   };
 
+  patches = [
+    ./reenable-python2.diff
+    ./read-file-for-python2.diff
+  ];
   checkInputs = [
     pytestCheckHook
   ];
